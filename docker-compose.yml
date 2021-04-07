@@ -1,0 +1,19 @@
+version: "3"
+services:
+  webserver:
+    build:
+      context: ./config
+    volumes:
+      - ./:/var/www/html:rw
+      - ./config/000-default.conf:/etc/apache2/sites-enabled/000-default.conf
+    ports:
+      - 8080:80
+  mysql:
+    image: mysql:5.7
+    volumes:
+      - ../data/mysql:/var/lib/mysql/
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: guia
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin
